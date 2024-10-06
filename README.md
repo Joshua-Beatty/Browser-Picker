@@ -43,7 +43,15 @@ The settings should be in the following format:
   ]
 }
 ```
-Default specifies if that this brower will be opened if the others are not running, have only one marked as running. The Path is the executable to the browser to launch, and the icon is a link to an icon to display. Home is the default home page to open if coming from browser picker directly and not a link event. name is the process name to search for when trying to decide if a non default browser is open and if the user should be prompted to chose a browser.
+Default specifies that this browser will be opened if the others are not running, have only one marked as default. 
+
+Path is the executable of the browser to launch
+
+Icon is a link to an icon to display. 
+
+Home is the default home page to open if coming from browser picker directly and not a link event. 
+
+Name is the process name to search for when trying to decide if a non default browser is open and if the user should be prompted to chose a browser.
 
 
 ## Development
