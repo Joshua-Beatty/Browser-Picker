@@ -22,6 +22,30 @@ If you need to remove the registry changes run the following command
 register_browser.bat uninstall BrowserPicker
 ```
 
+## Settings
+The settings should be in the following format:
+```json
+{
+  "browsers": [
+    {
+      "default": true,
+      "path": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/1971px-Firefox_logo%2C_2019.svg.png",
+      "name": "firefox",
+      "home": "about:home"
+    },
+    {
+      "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/480px-Google_Chrome_icon_%28February_2022%29.svg.png",
+      "name": "chrome",
+      "home": "https://google.com"
+    }
+  ]
+}
+```
+Default specifies if that this brower will be opened if the others are not running, have only one marked as running. The Path is the executable to the browser to launch, and the icon is a link to an icon to display. Home is the default home page to open if coming from browser picker directly and not a link event. name is the process name to search for when trying to decide if a non default browser is open and if the user should be prompted to chose a browser.
+
+
 ## Development
 Clone this repo then run the following commands:
 ```bash
