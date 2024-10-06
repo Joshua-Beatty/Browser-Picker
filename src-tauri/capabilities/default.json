@@ -1,0 +1,21 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "core:default",
+    "shell:allow-open",
+    "core:window:allow-show",
+    "core:window:allow-hide",
+    "core:window:allow-center",
+    "core:window:allow-set-always-on-top",
+    "core:window:allow-set-enabled",
+    "core:window:allow-set-focus",
+    "core:window:allow-unminimize",
+    "core:tray:allow-get-by-id",
+    "core:tray:allow-remove-by-id"
+  ]
+}
