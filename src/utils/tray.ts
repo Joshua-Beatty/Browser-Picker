@@ -3,40 +3,28 @@ import { showWindow } from "./window";
 import { TrayIcon, TrayIconEvent } from "@tauri-apps/api/tray";
 import { Menu } from "@tauri-apps/api/menu";
 
-function startTray() {
-  fetch("/icon.png")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.arrayBuffer();
-    })
-    .then(async (data) => {
-      await clearTrays();
-      const menu = await getMenu();
+async function startTray() {
+  const data = await (await fetch("/icon.png")).arrayBuffer();
+  await clearTrays();
+  const menu = await getMenu();
 
-      //@ts-expect-error
-      var tray = await TrayIcon.new({
-        id: "main-id",
-        menuOnLeftClick: false,
-        icon: new Uint8Array(data),
-        menu,
-        action: async (event: TrayIconEvent) => {
-          if (
-            event.type == "Click" &&
-            event.button == "Left" &&
-            event?.buttonState == "Down"
-          ) {
-            showWindow();
-            await invoke("print", { info: JSON.stringify(event) });
-            console.log(event);
-          }
-        },
-      });
-    })
-    .catch((error) => {
-      console.error("Error fetching the image:", error);
-    });
+  return await TrayIcon.new({
+    id: "main-id",
+    menuOnLeftClick: false,
+    icon: new Uint8Array(data),
+    menu,
+    action: async (event: TrayIconEvent) => {
+      if (
+        event.type == "Click" &&
+        event.button == "Left" &&
+        event?.buttonState == "Down"
+      ) {
+        showWindow();
+        await invoke("print", { info: JSON.stringify(event) });
+        console.log(event);
+      }
+    },
+  });
 }
 
 async function getMenu() {

@@ -1,8 +1,7 @@
 import { listen } from "@tauri-apps/api/event";
 import { handlePayload } from "./handleUrls";
 function singleInstanceListen(){
-    //@ts-expect-error
-    var unlistenSingleInstance = listen<string>("single-instance", (event: any) => {
+    const unlistenSingleInstance = listen<string>("single-instance", (event: any) => {
       console.log(`Got payload:`);
       console.log(event);
       if (
@@ -14,5 +13,6 @@ function singleInstanceListen(){
         console.log("Bad Event!");
       }
     });
+    return unlistenSingleInstance
 }
 export { singleInstanceListen }
