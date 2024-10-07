@@ -30,6 +30,10 @@ Then the second link is matched to chrome so it opens in chrome.
 Then another unmatched link, but now chrome is open, so it asks the user to chose the browser to load into.
 [![Demo](https://img.youtube.com/vi/m6kakXuEpTA/0.jpg)](https://www.youtube.com/watch?v=m6kakXuEpTA)
 
+Browser Picker also features a tray icon for easy opening:
+
+[![Demo](./images/tray_screenshot.png)](https://www.youtube.com/watch?v=m6kakXuEpTA)
+
 ## Install
 Download the msi in releases and install Browser Picker.
 
