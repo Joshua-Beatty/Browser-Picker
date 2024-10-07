@@ -16,6 +16,7 @@
     "core:window:allow-set-focus",
     "core:window:allow-unminimize",
     "core:tray:allow-get-by-id",
-    "core:tray:allow-remove-by-id"
+    "core:tray:allow-remove-by-id",
+    "core:window:allow-set-title"
   ]
 }

@@ -1,6 +1,27 @@
-# Browser Picker
+<div align="center">
+  <img width="130" src="src-tauri/icons/icon.png">
+  
+  <h1>Browser Picker</h1>
+  
+  <p align="center">A windows process that automatically routes links to the correct browser</p>
 
-This is a Tauri application which opens up a menu to let a user pick which browser to open a link in. It will default to the default browser unless once of the other browsers is open, at which point it will ask the user to choose.
+  <p align="center">
+    <a style="text-decoration:none" href="https://github.com/Joshua-Beatty/Browser-Picker/releases">
+      <img src="https://img.shields.io/github/v/release/Joshua-Beatty/Browser-Picker?color=red&label=latest%20version&style=flat-square" alt="Releases" />
+    </a>
+    <a style="text-decoration:none">
+      <img src="https://img.shields.io/badge/platform-Windows%2010%20%26%2011-blue.svg?style=flat-square" alt="Platform" />
+    </a>
+    <a style="text-decoration:none">
+      <img src="https://img.shields.io/github/license/Joshua-Beatty/Browser-Picker?style=flat-square" alt="License" />
+    </a>
+    <a style="text-decoration:none" href="https://github.com/Joshua-Beatty/Browser-Picker/commits">
+      <img src="https://img.shields.io/github/last-commit/Joshua-Beatty/Browser-Picker?color=orange&style=flat-square" alt="Commits" />
+    </a>
+  </p>
+</div>
+
+This is A Tauri application which opens up a menu to let a user pick which browser to open a link in. It will default to the default browser unless once of the other browsers is open, at which point it will ask the user to choose.
 
 ## Install
 Download the msi in releases and install Browser Picker.
@@ -54,3 +75,7 @@ npm run tauri dev
 #### Recommended IDE Setup
 
 - [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+
+## Notice
+
+Icons in this application come from [iconoir](https://github.com/iconoir-icons/iconoir/blob/main/LICENSE), [heroicons](https://github.com/iconoir-icons/iconoir/blob/main/LICENSE), and  [Feather Icons](https://github.com/feathericons/feather/blob/main/LICENSE)
