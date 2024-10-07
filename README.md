@@ -7,8 +7,7 @@
 
   <p align="center">
     <a style="text-decoration:none" href="https://github.com/Joshua-Beatty/Browser-Picker/releases">
-      <img src="https://img.shields.io/github/v/release/Joshua-Beatty/Browser-Picker?color=red&label=latest%20version&style=flat-square" alt="Releases" />
-    </a>
+      <img src="https://img.shields.io/github/v/release/Joshua-Beatty/Browser-Picker?color=red&label=latest%20version&style=flat-square" alt="Releases" /></a>
     <a style="text-decoration:none">
       <img src="https://img.shields.io/badge/platform-Windows%2010%20%26%2011-blue.svg?style=flat-square" alt="Platform" />
     </a>
