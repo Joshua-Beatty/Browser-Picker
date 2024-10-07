@@ -14,9 +14,6 @@
     <a style="text-decoration:none">
       <img src="https://img.shields.io/github/license/Joshua-Beatty/Browser-Picker" alt="License" />
     </a>
-    <a style="text-decoration:none" href="https://github.com/Joshua-Beatty/Browser-Picker/commits">
-      <img src="https://img.shields.io/github/last-commit/Joshua-Beatty/Browser-Picker?color=orange" alt="Commits" />
-    </a>
   </p>
 </div>
 
