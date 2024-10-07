@@ -19,10 +19,12 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 import { showWindow } from "./utils/window";
 import { startTray } from "./utils/tray";
 import { registerBrowser } from "./utils/registerBrowser";
+import { singleInstanceListen } from "./utils/singleInstance";
 let startup = sessionStorage.getItem("startup");
 if (!startup) {
   showWindow();
   registerBrowser();
+  singleInstanceListen()
+  startTray();
   sessionStorage.setItem("startup", "true");
 }
-startTray();

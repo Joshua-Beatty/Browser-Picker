@@ -14,7 +14,9 @@ function startTray() {
     .then(async (data) => {
       await clearTrays();
       const menu = await getMenu();
-      await TrayIcon.new({
+
+      //@ts-expect-error
+      var tray = await TrayIcon.new({
         id: "main-id",
         menuOnLeftClick: false,
         icon: new Uint8Array(data),
