@@ -3,7 +3,6 @@ import "./Styles.css";
 import ArrowLeft from "../assets/arrow-left.svg?react";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { Link } from "react-router-dom";
-import Arrow from "../assets/arrow";
 
 type Browser = {
   path?: string;
