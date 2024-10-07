@@ -2,8 +2,8 @@ import "./Styles.css";
 import { handleBrowser } from "../utils/handleUrls";
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "@uidotdev/usehooks";
-import { Browser } from "./Settings";
 import SettingsIcon from "../assets/cog.svg?react"
+import { Browser } from "../utils/data";
 
 function Root() {
   const [settings, _saveSettings] = useLocalStorage("settings", {

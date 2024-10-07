@@ -1,8 +1,7 @@
-
 import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { Browser } from "../pages/Settings";
 import { showWindow } from "./window";
+import { Browser } from "./data";
 
 const examplePayload = {
   args: [
@@ -18,44 +17,46 @@ function handleTestPayload() {
 async function handlePayload({ args, cwd }: { args: string[]; cwd: string }) {
   console.log({ args, cwd });
   if (args.length <= 1) return;
-  const link = args[1]
+  const link = args[1];
   console.log(`Handling Link: ${link}`);
   localStorage.setItem("url", link);
-  const settings = JSON.parse(localStorage.getItem("settings") || "{}") as { browsers: Browser[] };
-  
-  let nonDefaultOpen = false
-  for(const browser of settings.browsers){
-    if(browser.matches){
-      for(const pattern of browser.matches){
+  const settings = JSON.parse(localStorage.getItem("settings") || "{}") as {
+    browsers: Browser[];
+  };
+
+  let nonDefaultOpen = false;
+  for (const browser of settings.browsers) {
+    if (browser.matches) {
+      for (const pattern of browser.matches) {
         const re = new RegExp(pattern);
-        if(link && re.test(link)){
-          return handleBrowser(browser.path, browser.home)
+        if (link && re.test(link)) {
+          return handleBrowser(browser.path, browser.home);
         }
       }
     }
-    const isOpen = await invoke("check_if_process", { process: browser.name});
-    if(isOpen && !browser.default)
-        nonDefaultOpen = true
+    let isOpen = false;
+    if (browser.name)
+      isOpen = await invoke("check_if_process", { process: browser.name });
+    if (isOpen && !browser.default) nonDefaultOpen = true;
   }
-  if(!nonDefaultOpen){
-    for(const browser of settings.browsers){
-      if(browser.default)
-        return handleBrowser(browser.path, browser.home)
+  if (nonDefaultOpen == false) {
+    for (const browser of settings.browsers) {
+      if (browser.default) return handleBrowser(browser.path, browser.home);
     }
   }
   const urlToOpen = localStorage.getItem("url");
-  console.log("url: " + urlToOpen)
-  window.location.href = "/"
-  showWindow()
+  console.log("url: " + urlToOpen);
+  window.location.href = "/";
+  showWindow();
 }
 async function handleBrowser(path?: string, homePage?: string) {
-    const urlToOpen = localStorage.getItem("url");
-    const options = { cmd: path, arg: urlToOpen || homePage || "" }
-    console.log(options)
-    console.log("url: " + urlToOpen)
-    await invoke("run_shell", options);
-    localStorage.setItem("url", "");
-    getCurrentWindow().hide();
+  const urlToOpen = localStorage.getItem("url");
+  const options = { cmd: path, arg: urlToOpen || homePage || "" };
+  console.log(options);
+  console.log("url: " + urlToOpen);
+  await invoke("run_shell", options);
+  localStorage.setItem("url", "");
+  getCurrentWindow().hide();
 }
 
 export { handlePayload, handleBrowser, handleTestPayload };

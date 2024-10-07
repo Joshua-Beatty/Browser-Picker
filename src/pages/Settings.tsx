@@ -3,15 +3,10 @@ import "./Styles.css";
 import ArrowLeft from "../assets/arrow-left.svg?react";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { Link } from "react-router-dom";
+import { Browser } from "../utils/data";
+import { array, assert } from "superstruct";
 
-type Browser = {
-  path?: string;
-  icon?: string;
-  default?: boolean;
-  name?: string;
-  home?: string;
-  matches?: string[];
-};
+
 function Settings() {
   const [settings, setSettings] = useLocalStorage("settings", {
     browsers: [],
@@ -24,7 +19,9 @@ function Settings() {
   function saveSettings() {
     {
       try {
-        setSettings(JSON.parse(tempSettings));
+        const temp = JSON.parse(tempSettings)
+        assert(temp.browsers, array(Browser))
+        setSettings(temp);
         setTempSettings(JSON.stringify(JSON.parse(tempSettings), null, 2));
         setError("");
       } catch (e) {
@@ -67,4 +64,3 @@ function Settings() {
 }
 
 export default Settings;
-export type { Browser };
