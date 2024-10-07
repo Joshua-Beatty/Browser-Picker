@@ -22,6 +22,14 @@
 
 This is A Tauri application which opens up a menu to let a user pick which browser to open a link in. It will default to the default browser unless once of the other browsers is open, at which point it will ask the user to choose.
 
+## Demo
+This demo shows opening an unmatched link with no browsers open, so defaulting to the default browser.
+
+Then the second link is matched to chrome so it opens in chrome.
+
+Then another unmatched link, but now chrome is open, so it asks the user to chose the browser to load into.
+[![Demo](https://img.youtube.com/vi/m6kakXuEpTA/0.jpg)](https://www.youtube.com/watch?v=m6kakXuEpTA)
+
 ## Install
 Download the msi in releases and install Browser Picker.
 
