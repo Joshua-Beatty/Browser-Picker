@@ -1,8 +1,9 @@
 import "./App.css";
-import { handleBrowser} from "./handleUrls";
+import { handleBrowser } from "./handleUrls";
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { Browser } from "./Settings";
+import Cog from "./assets/cog";
 
 function App() {
   // const [txt, setTxt] = useState("");
@@ -11,23 +12,31 @@ function App() {
   } as { browsers: Browser[] });
 
   return (
-    <div className="container">
-      <h1>Choose A Browser To Launch</h1>
-
-      <div className="row">
-        {settings.browsers.map((b: Browser) => (
-          <>
-            <button style={{margin: "10px"}} onClick={()=>{handleBrowser(b.path || "", b.home || "")}}>
-              <img src={b.icon} width={"150px"} />
-            </button>
-          </>
-        ))}
+    <>
+      <div style={{display: "flex"}}>
+        <Link className="settingsCog" to="/settings">
+          <Cog />
+        </Link>
       </div>
-      
-      <Link to="/settings">Settings</Link>
+      <div className="container">
+        <h1>Choose A Browser To Launch</h1>
 
-      {/* <p>{greetMsg}</p> */}
-    </div>
+        <div className="row">
+          {settings.browsers.map((b: Browser) => (
+            <>
+              <button
+                style={{ margin: "10px" }}
+                onClick={() => {
+                  handleBrowser(b.path || "", b.home || "");
+                }}
+              >
+                <img src={b.icon} width={"150px"} />
+              </button>
+            </>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 

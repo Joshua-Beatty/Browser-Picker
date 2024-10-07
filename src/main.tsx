@@ -68,13 +68,7 @@ fetch("/tauri.png")
           event.button == "Left" &&
           event?.buttonState == "Down"
         ) {
-          let window = getCurrentWindow();
-          window.show();
-          window.setEnabled(true);
-          window.unminimize();
-          window.setAlwaysOnTop(true);
-          window.setFocus();
-          window.center();
+          showWindow()
 
           await invoke("print", { info: JSON.stringify(event) });
           console.log(event);
@@ -88,6 +82,7 @@ fetch("/tauri.png")
 
 import { listen } from "@tauri-apps/api/event";
 import { handlePayload } from "./handleUrls";
+import { showWindow } from "./window";
 listen<string>("single-instance", (event: any) => {
   console.log(`Got payload:`);
   console.log(event);
@@ -101,4 +96,16 @@ listen<string>("single-instance", (event: any) => {
   }
 });
 
-localStorage.setItem("url", "");
+(async ()=>{
+  let registered = sessionStorage.getItem("registered");
+  if(!registered){
+    const text = await invoke("install_browser_picker")
+    if(typeof text == "string"){
+      if(text.includes("Error")){
+        alert(text)
+      } else {
+        sessionStorage.setItem("registered", "true");
+      }
+    }
+  }
+})();

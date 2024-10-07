@@ -1,3 +1,9 @@
+
+import { invoke } from "@tauri-apps/api/core";
+import { getCurrentWindow } from "@tauri-apps/api/window";
+import { Browser } from "./Settings";
+import { showWindow } from "./window";
+
 const examplePayload = {
   args: [
     "C:\\Program Files\\browser-picker\\browser-picker.exe",
@@ -12,12 +18,21 @@ function handleTestPayload() {
 async function handlePayload({ args, cwd }: { args: string[]; cwd: string }) {
   console.log({ args, cwd });
   if (args.length <= 1) return;
-  console.log(`Handling Link: ${args[1]}`);
-  localStorage.setItem("url", args[1]);
+  const link = args[1]
+  console.log(`Handling Link: ${link}`);
+  localStorage.setItem("url", link);
   const settings = JSON.parse(localStorage.getItem("settings") || "{}") as { browsers: Browser[] };
   
   let nonDefaultOpen = false
   for(const browser of settings.browsers){
+    if(browser.matches){
+      for(const pattern of browser.matches){
+        const re = new RegExp(pattern);
+        if(link && re.test(link)){
+          return handleBrowser(browser.path, browser.home)
+        }
+      }
+    }
     const isOpen = await invoke("check_if_process", { process: browser.name});
     if(isOpen && !browser.default)
         nonDefaultOpen = true
@@ -28,25 +43,19 @@ async function handlePayload({ args, cwd }: { args: string[]; cwd: string }) {
         return handleBrowser(browser.path, browser.home)
     }
   }
-  let window = getCurrentWindow();
-  window.show();
-  window.setEnabled(true);
-  window.unminimize();
-  window.setAlwaysOnTop(true);
-  window.setFocus();
-  window.center();
+  const urlToOpen = localStorage.getItem("url");
+  console.log("url: " + urlToOpen)
+  window.location.href = "/"
+  showWindow()
 }
-import { invoke } from "@tauri-apps/api/core";
-import { getCurrentWindow } from "@tauri-apps/api/window";
-import { Browser } from "./Settings";
 async function handleBrowser(path?: string, homePage?: string) {
     const urlToOpen = localStorage.getItem("url");
     const options = { cmd: path, arg: urlToOpen || homePage || "" }
     console.log(options)
+    console.log("url: " + urlToOpen)
     await invoke("run_shell", options);
     localStorage.setItem("url", "");
     getCurrentWindow().hide();
-
-
 }
+
 export { handlePayload, handleBrowser, handleTestPayload };
