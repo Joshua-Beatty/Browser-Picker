@@ -45,9 +45,9 @@ async function handlePayload({ args, cwd }: { args: string[]; cwd: string }) {
     }
   }
   const urlToOpen = localStorage.getItem("url");
-  console.log("url: " + urlToOpen);
+  console.log(`Showing window so user can chose to handle url: ${urlToOpen}`)
+  await showWindow();
   window.location.href = "/";
-  showWindow();
 }
 async function handleBrowser(path?: string, homePage?: string) {
   const urlToOpen = localStorage.getItem("url");

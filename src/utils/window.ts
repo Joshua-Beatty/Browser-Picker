@@ -2,14 +2,15 @@ import { getAllWindows } from "@tauri-apps/api/window";
 
 async function showWindow() {
   let windows = await getAllWindows();
+  console.log(windows)
   for(const window of  windows){
-    window.show();
-    window.setEnabled(true);
-    window.unminimize();
-    window.setAlwaysOnTop(true);
-    window.setFocus();
-    window.center();
-    window.setTitle("Browser Picker")
+    await window.show();
+    await window.setEnabled(true);
+    await window.unminimize();
+    await window.setAlwaysOnTop(true);
+    await window.setFocus();
+    await window.center();
+    await window.setTitle("Browser Picker")
   }
 }
 
