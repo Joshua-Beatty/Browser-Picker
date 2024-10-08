@@ -5,26 +5,21 @@ import Settings from "./pages/Settings";
 import { HashRouter, Route, Routes } from "react-router-dom";
 
 import { showWindow } from "./utils/window";
-import { startTray } from "./utils/tray";
 import { registerBrowser } from "./utils/registerBrowser";
 import { singleInstanceListen } from "./utils/singleInstance";
+import { invoke } from "@tauri-apps/api/core";
 
-let didInit = false;
 function BuildRouter() {
   useEffect(() => {
-    if (!didInit) {
-      didInit = true;
-      showWindow();
-      registerBrowser();
-      const unlisten = singleInstanceListen();
-      const tray = startTray();
-      return () => {
-        (async () => {
-          (await unlisten)();
-          (await tray).close();
-        })();
-      };
+    singleInstanceListen();
+    async function init() {
+      const first = await invoke("first_time_called");
+      if (first) {
+        showWindow();
+        registerBrowser();
+      }
     }
+    init();
   }, []);
 
   return (
@@ -46,8 +41,3 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <BuildRouter />
   </React.StrictMode>
 );
-
-// let startup = sessionStorage.getItem("startup");
-// if (!startup) {
-//   sessionStorage.setItem("startup", "true");
-// }
